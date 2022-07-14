@@ -1,4 +1,5 @@
 import { combineReducers, createStore } from 'redux'
+import { GameStateReducer, initialGameState } from '../GameStateReducer'
 import { gameSelectReducer, initialSelectValue } from '../SelectReducer'
 // import { MemberRandomPossitonInMatrix } from '../functions/CreateMatrix'
 
@@ -8,10 +9,13 @@ import { gameSelectReducer, initialSelectValue } from '../SelectReducer'
 const store = createStore(
   combineReducers({
     gameSelect: gameSelectReducer,
+    gameState:GameStateReducer,
   }),
   {
-    gameSelect: initialSelectValue  
+    gameSelect: initialSelectValue  ,
+    gameState:initialGameState
   }
+
 )
 
 export { store } 

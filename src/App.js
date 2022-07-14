@@ -9,9 +9,13 @@ import { DrawGameZone } from "./functions/DrawGameZone/DrawGameZone"
 const directionButtons = ["up", "left", "right", "down"]
 
 function App() {
-  const boardSize = useSelector(function(state) {
-    // console.log(state.gameSelect.boardSize)
+  const boardSize = useSelector(function (state) {
     return state.gameSelect.boardSize
+  })
+
+  const matrix = useSelector((state) => {
+    console.log(state.gameState.gameMatrix)
+    return state.gameState.gameMatrix
   })
 
   const dispatch = useDispatch()
@@ -21,17 +25,16 @@ function App() {
       <div>
         <Btn
           className="startbutton"
-          onClick={()=>{
-            console.log(boardSize,"555")
+          onClick={() => {
             dispatch({
-              type: "update-BoardSize",
+              type: "game_state",
               payload: {
-                boardSize: MemberRandomPossitonInMatrix(boardSize),
+                gameMatrix: MemberRandomPossitonInMatrix(boardSize),
+                isGameover: false,
+                gameStatus: "",
               },
             })
-          }
-            
-          }
+          }}
         >
           Start
         </Btn>
@@ -48,7 +51,7 @@ function App() {
           }}
         ></Select>
       </div>
-      {/* <DrawGameZone matrix={boardSize} /> */}
+      <DrawGameZone matrix={matrix} />
       <div>
         {directionButtons.map((direction, i) => {
           return (

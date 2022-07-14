@@ -1,8 +1,7 @@
 import React from "react"
-import {Draw} from "../DrowImg/DrawImg"
+import { Draw } from "../DrowImg/DrawImg"
 import { Box } from "./DrawGameZoneStyler"
 import { GameZone } from "./DrawGameZoneStyler"
-
 
 const DrawGameZone = (props) => {
   const matrix = props.matrix
@@ -10,7 +9,7 @@ const DrawGameZone = (props) => {
     width: matrix.length * 60 + 20 + "px",
   }
   return (
-    <GameZone  style={divStyle}>
+    <GameZone style={divStyle}>
       {matrix.map((row, k) =>
         row.map((column, i) => {
           return (
