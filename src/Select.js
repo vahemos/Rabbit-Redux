@@ -4,7 +4,7 @@ import { SelectBtn } from "./StartStyle"
 
 // const [boardSize, setBoardSize] = useState(5)
 
-const selectValues = [5,7,10]
+const selectValues = [5 , 7, 10]
 
 
 
