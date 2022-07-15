@@ -43,7 +43,7 @@ const getClosestCell = (freeBoxes, gameState) => {
   const rabbitCords = getMemberPosition(gameState, rabbit)
   const distaceArray = []
   freeBoxes.forEach((cord) => {
-    if(gameState.isGameover === true){
+    if (gameState.isGameover === true) {
       return
     }
     const distanceSingle = distance(cord, rabbitCords[0])
@@ -73,8 +73,6 @@ const moveSingleWolfToNewPosition = ([x, y], [z, k], gameState) => {
     return
   }
   matrix[x][y] = wolf
-  
-  console.log(gameState,99)
 }
 
 const getMemberPosition = (gameState, gameMember) => {

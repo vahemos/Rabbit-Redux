@@ -16,7 +16,6 @@ function getMemberPosition(gameState, gameMember) {
     })
     return accum
   }
-
   return matrix.reduce(findeposs, [])
 }
 
@@ -31,7 +30,7 @@ const moveRabbit = (gameState, x, y) => {
   )[0]
   if (matrix[x][y] === GAME_CONST_PROPERTIES.ban.name) {
     gameState.isGameover = false
-    return 
+    return
   } else if (matrix[x][y] === GAME_CONST_PROPERTIES.wolf.name) {
     gameState.isGameover = true
     gameState.gameStatus = "you lose"
@@ -42,7 +41,7 @@ const moveRabbit = (gameState, x, y) => {
     gameState.isGameover = true
     gameState.gameStatus = "you win"
     alert("you win ")
-    return 
+    return
   } else if (matrix[x][y] === freebox) {
     matrix[rabbitX][rabbitY] = freebox
     matrix[x][y] = GAME_CONST_PROPERTIES.rabbit.name

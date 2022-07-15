@@ -17,14 +17,18 @@ function App() {
   const matrix = useSelector((state) => {
     return state.gameState.gameMatrix
   })
+  const status  = useSelector((state) => {
+    return state.gameState.isGameover
+  })
 
   const dispatch = useDispatch()
 
   const gameObject = useSelector((state) => state.gameState)
 
   const setRabbitNewCells = (direction, gameObject) => {
+    console.log(gameObject, "123456")
     const gameNewState = gameMovments(direction, { ...gameObject })
-
+    console.log(gameNewState, "final")
     dispatch({
       type: "game_state",
       payload: {
@@ -34,6 +38,8 @@ function App() {
       },
     })
   }
+console.log(status,44)
+  const isGameProcess = status === false && matrix.length > 0
 
   return (
     <Wrapper>
@@ -45,7 +51,7 @@ function App() {
               type: "game_state",
               payload: {
                 gameMatrix: MemberRandomPossitonInMatrix(boardSize),
-                isGameover: '',
+                isGameover: false,
                 gameStatus: "",
               },
             })
@@ -70,13 +76,15 @@ function App() {
       <div>
         {directionButtons.map((direction, i) => {
           return (
+            
             <div className={direction} key={i}>
-              <DirectionBtn
+              {isGameProcess ? <DirectionBtn
                 direction={direction}
                 onClick={() => setRabbitNewCells(direction, gameObject)}
               >
                 {direction.toUpperCase()}
-              </DirectionBtn>
+              </DirectionBtn> : null} 
+              
             </div>
           )
         })}

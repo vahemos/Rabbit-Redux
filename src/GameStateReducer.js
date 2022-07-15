@@ -11,29 +11,29 @@ export const GameStateReducer = (state = {}, action) => {
 
 export const initialGameState = {
   gameMatrix: [],
-  isGameover: '',
+  isGameover: false,
   gameStatus: "",
 }
 
-export const gameMatrix = (state) => {
-  return state.gameState.gameMatrix
-}
+// export const gameMatrix = (state) => {
+//   return state.gameState.gameMatrix
+// }
 
-export const gameResult = (state) => {
-  return state.gameState.isGameover
-}
+// export const gameResult = (state) => {
+//   return state.gameState.isGameover
+// }
 
-export const gameStatus = (state) => {
-  return state.gameState.gameStatus
-}
+// export const gameStatus = (state) => {
+//   return state.gameState.gameStatus
+// }
 
-export const setGameState = (setGameMatrix, setGameResult, setgameStatus) => {
-  return {
-    type: "game_state",
-    payload: {
-      gameMatrix: setGameMatrix,
-      isGameover: setGameResult,
-      gameStatus: setgameStatus,
-    },
-  }
-}
+// export const setGameState = (setGameMatrix, setGameResult, setgameStatus) => {
+//   return {
+//     type: "game_state",
+//     payload: {
+//       gameMatrix: setGameMatrix,
+//       isGameover: setGameResult,
+//       gameStatus: setgameStatus,
+//     },
+//   }
+// }
