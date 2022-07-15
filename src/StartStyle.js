@@ -37,8 +37,7 @@ const Btn = styled.button`
 
 const DirectionBtn = styled.button`
   position: relative;
-  bottom: ${(props) =>
-    props.direction === "down" || props.direction === "right" ? "50px" : ""};
+  bottom: ${(props) => props.direction === "down" || props.direction === "right" ? "50px" : ""};
   left: ${(props) => (props.direction === "right" ? "100px" : "")};
   right: ${(props) => (props.direction === "left" ? "100px" : "")};
   text-align: center;

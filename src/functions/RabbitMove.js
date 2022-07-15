@@ -3,50 +3,56 @@ import { GAME_CONST_PROPERTIES } from "./constants"
 const freebox = "0"
 
 function getMemberPosition(gameState, gameMember) {
-  const matrix = gameState.matrix
+  const matrix = gameState.gameMatrix
+
   const findeposs = function (accum, row, x) {
     row.forEach((item, y) => {
+      if (gameState.isGameover === true) {
+        return
+      }
       if (item === gameMember) {
         accum.push([x, y])
       }
     })
-
     return accum
   }
 
   return matrix.reduce(findeposs, [])
 }
 
-const setGameStatusIfNeeded = (gameState, x, y) => {
-  const matrix = gameState.matrix
-
-  if (matrix[x][y] === GAME_CONST_PROPERTIES.wolf.name) {
-    gameState.isGameOver = true
-    gameState.gameStatus = "you lose"
-    return
-  }
-  if (matrix[x][y] === GAME_CONST_PROPERTIES.house.name) {
-    gameState.isGameOver = true
-    gameState.gameStatus = "you win"
-    return
-  }
-}
-
 const moveRabbit = (gameState, x, y) => {
-  const matrix = gameState.matrix
+  if (gameState.isGameover === true) {
+    return
+  }
+  const matrix = gameState.gameMatrix
   const [rabbitX, rabbitY] = getMemberPosition(
     gameState,
     GAME_CONST_PROPERTIES.rabbit.name
   )[0]
-  if (matrix[x][y] !== GAME_CONST_PROPERTIES.ban.name) {
-    matrix[x][y] = GAME_CONST_PROPERTIES.rabbit.name
+  if (matrix[x][y] === GAME_CONST_PROPERTIES.ban.name) {
+    gameState.isGameover = false
+    return 
+  } else if (matrix[x][y] === GAME_CONST_PROPERTIES.wolf.name) {
+    gameState.isGameover = true
+    gameState.gameStatus = "you lose"
+    alert("you lose")
+
+    return
+  } else if (matrix[x][y] === GAME_CONST_PROPERTIES.house.name) {
+    gameState.isGameover = true
+    gameState.gameStatus = "you win"
+    alert("you win ")
+    return 
+  } else if (matrix[x][y] === freebox) {
     matrix[rabbitX][rabbitY] = freebox
+    matrix[x][y] = GAME_CONST_PROPERTIES.rabbit.name
   }
+
   return gameState
 }
 
 const rabbitMove = (direction, gameState) => {
-  const matrix = gameState.matrix
+  const matrix = gameState.gameMatrix
   const cordinateOfCharacter = getMemberPosition(
     gameState,
     GAME_CONST_PROPERTIES.rabbit.name
@@ -77,7 +83,9 @@ const rabbitMove = (direction, gameState) => {
     }
   }
 
-  setGameStatusIfNeeded(gameState, newX, newY)
+  if (gameState.isGameover === true) {
+    return
+  }
 
   return moveRabbit(gameState, newX, newY)
 }

@@ -5,6 +5,7 @@ import { Wrapper, Btn, DirectionBtn, GlobalStyle } from "./StartStyle"
 import { Select } from "./Select"
 import { MemberRandomPossitonInMatrix } from "./functions/CreateMatrix"
 import { DrawGameZone } from "./functions/DrawGameZone/DrawGameZone"
+import { gameMovments } from "./functions/gameMovments"
 
 const directionButtons = ["up", "left", "right", "down"]
 
@@ -14,11 +15,25 @@ function App() {
   })
 
   const matrix = useSelector((state) => {
-    console.log(state.gameState.gameMatrix)
     return state.gameState.gameMatrix
   })
 
   const dispatch = useDispatch()
+
+  const gameObject = useSelector((state) => state.gameState)
+
+  const setRabbitNewCells = (direction, gameObject) => {
+    const gameNewState = gameMovments(direction, { ...gameObject })
+
+    dispatch({
+      type: "game_state",
+      payload: {
+        gameMatrix: gameNewState.gameMatrix,
+        isGameover: gameNewState.isGameover,
+        gameStatus: gameNewState.gameStatus,
+      },
+    })
+  }
 
   return (
     <Wrapper>
@@ -30,7 +45,7 @@ function App() {
               type: "game_state",
               payload: {
                 gameMatrix: MemberRandomPossitonInMatrix(boardSize),
-                isGameover: false,
+                isGameover: '',
                 gameStatus: "",
               },
             })
@@ -56,7 +71,10 @@ function App() {
         {directionButtons.map((direction, i) => {
           return (
             <div className={direction} key={i}>
-              <DirectionBtn direction={direction}>
+              <DirectionBtn
+                direction={direction}
+                onClick={() => setRabbitNewCells(direction, gameObject)}
+              >
                 {direction.toUpperCase()}
               </DirectionBtn>
             </div>

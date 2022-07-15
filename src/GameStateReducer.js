@@ -11,7 +11,7 @@ export const GameStateReducer = (state = {}, action) => {
 
 export const initialGameState = {
   gameMatrix: [],
-  isGameover: false,
+  isGameover: '',
   gameStatus: "",
 }
 
