@@ -6,7 +6,9 @@ function getMemberPosition(gameState, gameMember) {
   const matrix = gameState.gameMatrix
 
   const findeposs = function (accum, row, x) {
+    
     row.forEach((item, y) => {
+      
       if (gameState.isGameover === true) {
         return
       }
@@ -19,34 +21,29 @@ function getMemberPosition(gameState, gameMember) {
   return matrix.reduce(findeposs, [])
 }
 
-const moveRabbit = (gameState, x, y) => {
-  if (gameState.isGameover === true) {
-    return
-  }
+const changeGameStatus = (gameState, x, y) => {
   const matrix = gameState.gameMatrix
   const [rabbitX, rabbitY] = getMemberPosition(
     gameState,
     GAME_CONST_PROPERTIES.rabbit.name
   )[0]
-  if (matrix[x][y] === GAME_CONST_PROPERTIES.ban.name) {
-    gameState.isGameover = false
-    return
+  
+  matrix[rabbitX][rabbitY] = freebox
+  if (matrix[x][y] === freebox) {
+    matrix[x][y] = GAME_CONST_PROPERTIES.rabbit.name
   } else if (matrix[x][y] === GAME_CONST_PROPERTIES.wolf.name) {
     gameState.isGameover = true
-    gameState.gameStatus = "you lose"
-    alert("you lose")
-
+    gameState.gameStatus = 'gameOver'
     return
   } else if (matrix[x][y] === GAME_CONST_PROPERTIES.house.name) {
     gameState.isGameover = true
-    gameState.gameStatus = "you win"
-    alert("you win ")
+    gameState.gameStatus = 'youWon'
     return
-  } else if (matrix[x][y] === freebox) {
-    matrix[rabbitX][rabbitY] = freebox
-    matrix[x][y] = GAME_CONST_PROPERTIES.rabbit.name
+  } else if (matrix[x][y] === GAME_CONST_PROPERTIES.ban.name) {
+    matrix[rabbitX][rabbitY] = GAME_CONST_PROPERTIES.rabbit.name
+    matrix[x][y] = GAME_CONST_PROPERTIES.ban.name
+    return
   }
-
   return gameState
 }
 
@@ -82,11 +79,8 @@ const rabbitMove = (direction, gameState) => {
     }
   }
 
-  if (gameState.isGameover === true) {
-    return
-  }
-
-  return moveRabbit(gameState, newX, newY)
+  changeGameStatus(gameState, newX, newY)
+  return gameState
 }
 
 export { rabbitMove }

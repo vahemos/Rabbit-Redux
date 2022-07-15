@@ -6,6 +6,7 @@ import { Select } from "./Select"
 import { MemberRandomPossitonInMatrix } from "./functions/CreateMatrix"
 import { DrawGameZone } from "./functions/DrawGameZone/DrawGameZone"
 import { gameMovments } from "./functions/gameMovments"
+import { ShowMessage } from "./functions/DrawGameZone/ShowMessage/ShowMessage"
 
 const directionButtons = ["up", "left", "right", "down"]
 
@@ -26,9 +27,8 @@ function App() {
   const gameObject = useSelector((state) => state.gameState)
 
   const setRabbitNewCells = (direction, gameObject) => {
-    console.log(gameObject, "123456")
+    
     const gameNewState = gameMovments(direction, { ...gameObject })
-    console.log(gameNewState, "final")
     dispatch({
       type: "game_state",
       payload: {
@@ -38,7 +38,7 @@ function App() {
       },
     })
   }
-console.log(status,44)
+
   const isGameProcess = status === false && matrix.length > 0
 
   return (
@@ -72,7 +72,12 @@ console.log(status,44)
           }}
         ></Select>
       </div>
-      <DrawGameZone matrix={matrix} />
+      {gameObject.isGameover === true ? (
+        <ShowMessage gameObject={gameObject} />
+      ) : (
+         <DrawGameZone matrix={matrix} />
+      )}
+     
       <div>
         {directionButtons.map((direction, i) => {
           return (
@@ -80,7 +85,10 @@ console.log(status,44)
             <div className={direction} key={i}>
               {isGameProcess ? <DirectionBtn
                 direction={direction}
-                onClick={() => setRabbitNewCells(direction, gameObject)}
+                onClick={() =>{
+                 
+                  setRabbitNewCells(direction, gameObject)}
+                }
               >
                 {direction.toUpperCase()}
               </DirectionBtn> : null} 

@@ -6,12 +6,14 @@ export const GameStateReducer = (state = {}, action) => {
       gameStatus: action.payload.gameStatus,
     }
   }
+
+ 
   return state
 }
 
 export const initialGameState = {
   gameMatrix: [],
-  isGameover: false,
+  isGameover: '',
   gameStatus: "",
 }
 
