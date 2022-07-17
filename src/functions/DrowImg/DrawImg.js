@@ -5,7 +5,7 @@ import { Img } from "./DrawImgStyle"
 const Draw = (props) => {
   const column = props.column
   let src=""
-  if(column === "0"){
+  if(column === 0){
     return
   }else if (column === GAME_CONST_PROPERTIES.rabbit.name) {
     src = GAME_CONST_PROPERTIES.rabbit.src

@@ -1,6 +1,6 @@
 import { GAME_CONST_PROPERTIES } from "./constants"
 
-const freebox = "0"
+const freebox = 0
 
 function getMemberPosition(gameState, gameMember) {
   const matrix = gameState.gameMatrix
@@ -33,11 +33,11 @@ const changeGameStatus = (gameState, x, y) => {
     matrix[x][y] = GAME_CONST_PROPERTIES.rabbit.name
   } else if (matrix[x][y] === GAME_CONST_PROPERTIES.wolf.name) {
     gameState.isGameover = true
-    gameState.gameStatus = 'gameOver'
+    gameState.gameStatus = "you lose"
     return
   } else if (matrix[x][y] === GAME_CONST_PROPERTIES.house.name) {
     gameState.isGameover = true
-    gameState.gameStatus = 'youWon'
+    gameState.gameStatus = 'you win'
     return
   } else if (matrix[x][y] === GAME_CONST_PROPERTIES.ban.name) {
     matrix[rabbitX][rabbitY] = GAME_CONST_PROPERTIES.rabbit.name

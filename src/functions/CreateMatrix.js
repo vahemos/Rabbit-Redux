@@ -1,7 +1,7 @@
 import { GAME_CONST_PROPERTIES } from "./constants"
 
 
-const freebox = "0"
+const freebox = 0
 const rabbit = GAME_CONST_PROPERTIES.rabbit.name
 
 const house = GAME_CONST_PROPERTIES.house.name

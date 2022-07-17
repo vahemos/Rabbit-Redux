@@ -1,19 +1,16 @@
 import { GAME_CONST_PROPERTIES } from "./constants"
 
-const freebox = "0"
-const rabbit = GAME_CONST_PROPERTIES.rabbit.name
-const wolf = GAME_CONST_PROPERTIES.wolf.name
+const freebox = 0
 
 const atacRabbit = (gameState, emptyCellsArr) => {
   const matrix = gameState.gameMatrix
   const massiv = []
   emptyCellsArr.forEach((cell) => {
     const [x, y] = cell
-    if (matrix[x][y] === rabbit) {
+    if (matrix[x][y] === GAME_CONST_PROPERTIES.rabbit.name) {
       gameState.isGameover = true
       gameState.gameStatus = "you lose"
-      alert("you lose")
-      return
+      return gameState
     } else if (matrix[x][y] === freebox) {
       massiv.push([x, y])
     }
@@ -38,7 +35,10 @@ const isInRange = (gameState, [x, y]) =>
   y < gameState.gameMatrix.length
 
 const getClosestCell = (freeBoxes, gameState) => {
-  const rabbitCords = getMemberPosition(gameState, rabbit)
+  const rabbitCords = getMemberPosition(
+    gameState,
+    GAME_CONST_PROPERTIES.rabbit.name
+  )
   const distaceArray = []
   freeBoxes.forEach((cord) => {
     if (gameState.isGameover === true) {
@@ -65,13 +65,8 @@ const getMinDistance = (distaceArray, freeBoxes) => {
 const moveSingleWolfToNewPosition = ([x, y], [z, k], gameState) => {
   const matrix = gameState.gameMatrix
   matrix[z][k] = freebox
-  if (matrix[x][y] === GAME_CONST_PROPERTIES.rabbit.name) {
-    gameState.isGameover = true
-    gameState.gameStatus = "you lose"
-    return
-  }
+  matrix[x][y] = GAME_CONST_PROPERTIES.wolf.name
 
-  matrix[x][y] = wolf
   return gameState
 }
 
@@ -80,7 +75,7 @@ const getMemberPosition = (gameState, gameMember) => {
   const findeposs = function (accum, row, x) {
     row.forEach((item, y) => {
       if (gameState.isGameover === true) {
-        return
+        return gameState
       }
       if (item === gameMember) {
         accum.push([x, y])
@@ -93,18 +88,17 @@ const getMemberPosition = (gameState, gameMember) => {
 
 const wolvesMove = (gameState, member) => {
   const wolvesCorrentPossition = getMemberPosition(gameState, member)
-
   wolvesCorrentPossition.forEach((wolf) => {
     if (gameState.isGameover === true) {
-      return
+      return gameState
     }
     const cells = getCordinat(gameState, wolf)
-
     const wolfNextStep = atacRabbit(gameState, cells)
-
     const distanceArray = getClosestCell(wolfNextStep, gameState)
     const closestCell = getMinDistance(distanceArray, wolfNextStep)
-    moveSingleWolfToNewPosition(closestCell, wolf, gameState)
+    if (gameState.isGameover === false) {
+      moveSingleWolfToNewPosition(closestCell, wolf, gameState)
+    }
   })
 
   return gameState

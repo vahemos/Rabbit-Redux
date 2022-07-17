@@ -6,28 +6,20 @@ import { Select } from "./Select"
 import { MemberRandomPossitonInMatrix } from "./functions/CreateMatrix"
 import { DrawGameZone } from "./functions/DrawGameZone/DrawGameZone"
 import { gameMovments } from "./functions/gameMovments"
-import { ShowMessage } from "./functions/DrawGameZone/ShowMessage/ShowMessage"
+import { ShowMessage } from "./functions/ShowMessage/ShowMessage"
 
 const directionButtons = ["up", "left", "right", "down"]
 
 function App() {
-  const boardSize = useSelector(function (state) {
-    return state.gameSelect.boardSize
-  })
-
-  const matrix = useSelector((state) => {
-    return state.gameState.gameMatrix
-  })
-  const status  = useSelector((state) => {
-    return state.gameState.isGameover
-  })
+  const boardSize = useSelector((state) => state.gameSelect.boardSize)
+  const matrix = useSelector((state) => state.gameState.gameMatrix)
+  const isInProcess = useSelector((state) => state.gameState.isGameover)
 
   const dispatch = useDispatch()
 
   const gameObject = useSelector((state) => state.gameState)
 
   const setRabbitNewCells = (direction, gameObject) => {
-    
     const gameNewState = gameMovments(direction, { ...gameObject })
     dispatch({
       type: "game_state",
@@ -39,10 +31,11 @@ function App() {
     })
   }
 
-  const isGameProcess = status === false && matrix.length > 0
+  const isGameProcess = isInProcess === false && matrix.length > 0
 
   return (
     <Wrapper>
+      {/* <GlobalStyle /> */}
       <div>
         <Btn
           className="startbutton"
@@ -62,11 +55,11 @@ function App() {
 
         <Select
           className="select"
-          onChange={(e) => {
+          onChange={(event) => {
             dispatch({
               type: "update-BoardSize",
               payload: {
-                boardSize: parseInt(e.target.value),
+                boardSize: parseInt(event.target.value),
               },
             })
           }}
@@ -75,24 +68,23 @@ function App() {
       {gameObject.isGameover === true ? (
         <ShowMessage gameObject={gameObject} />
       ) : (
-         <DrawGameZone matrix={matrix} />
+        <DrawGameZone matrix={matrix} />
       )}
-     
+
       <div>
-        {directionButtons.map((direction, i) => {
+        {directionButtons.map((direction, index) => {
           return (
-            
-            <div className={direction} key={i}>
-              {isGameProcess ? <DirectionBtn
-                direction={direction}
-                onClick={() =>{
-                 
-                  setRabbitNewCells(direction, gameObject)}
-                }
-              >
-                {direction.toUpperCase()}
-              </DirectionBtn> : null} 
-              
+            <div className={direction} key={index}>
+              {isGameProcess ? (
+                <DirectionBtn
+                  direction={direction}
+                  onClick={() => {
+                    setRabbitNewCells(direction, gameObject)
+                  }}
+                >
+                  {direction.toUpperCase()}
+                </DirectionBtn>
+              ) : null}
             </div>
           )
         })}
