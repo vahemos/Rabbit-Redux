@@ -1,8 +1,8 @@
 import styled from "styled-components"
 
 const Img=styled.img`
-width: 60px;
-height: 60px;
+width: 35px;
+height: 35px;
 }
 `
 

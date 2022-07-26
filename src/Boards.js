@@ -24,7 +24,7 @@ const Board = ({ gameState, boardNumber }) => {
           })
         }}
       >
-        Start
+        Start  
       </StartBtn>
       <Select onChange={selectChange} value={selectValue}></Select>
       {gameState.isGameover === true ? (
@@ -39,7 +39,7 @@ const Board = ({ gameState, boardNumber }) => {
               {gameState.isGameover === false &&
               gameState.gameMatrix.length > 0 ? (
                 <DirectionBtn
-                  direction={direction}
+                  direction = {direction}
                   onClick={() => {
                     dispatch({
                       type: "change-game-state",

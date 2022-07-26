@@ -23,10 +23,11 @@ const Wrapper = styled.div`
 const StartBtn = styled.button`
   text-align: center;
   border: 2px solid #34e943;
-  font-size: 30px;
-  width: 150px;
-  padding: 4px;
+  font-size: 20px;
+  width: 100px;
+  padding: 2px;
   margin: 3px;
+  margin-bottom: 5px;
   border-radius: 20px;
   outline: none;
   background-color: #5b3a97;
@@ -37,9 +38,9 @@ const StartBtn = styled.button`
 const NewBoardBtn = styled.button`
   text-align: center;
   border: 2px solid #34e943;
-  font-size: 30px;
-  width: 150px;
-  padding: 4px;
+  font-size: 20px;
+  width: 100px;
+  padding: 2px;
   margin: 3px;
   border-radius: 20px;
   outline: none;
@@ -54,15 +55,18 @@ const NewBoardBtn = styled.button`
 
 const DirectionBtn = styled.button`
   position: relative;
-  bottom: ${(props) => props.direction === "down" || props.direction === "right" ? "50px" : ""};
-  left: ${(props) => (props.direction === "right" ? "100px" : "")};
-  right: ${(props) => (props.direction === "left" ? "100px" : "")};
+  bottom: ${(props) => props.direction === "down" || props.direction === "right" ? "30px" : ""};
+  bottom: ${(props) => props.direction === "right"  ? "40px" : ""};
+  bottom: ${(props) => props.direction === "down" ? "40px" : ""};
+  left: ${(props) => props.direction === "right" ? "80px" : ""};
+  right: ${(props) => props.direction === "left" ? "80px" : ""};
+  
   text-align: center;
   border: 2px solid #34e943;
-  font-size: 30px;
-  width: 150px;
+  font-size: 20px;
+  width: 100px;
   padding: 4px;
-  margin: 3px;
+  margin-top: 2px;
   border-radius: 20px;
   outline: none;
   background-color: #5b3a97;
@@ -72,9 +76,9 @@ const DirectionBtn = styled.button`
 const SelectBtn = styled.select`
   text-align: center;
   border: 2px solid #34e943;
-  font-size: 30px;
-  width: 150px;
-  padding: 4px;
+  font-size: 20px;
+  width: 100px;
+  padding: 2px;
   margin: 3px;
   border-radius: 20px;
   outline: none;

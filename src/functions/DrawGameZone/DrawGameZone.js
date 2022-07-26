@@ -6,7 +6,7 @@ import { GameZone } from "./DrawGameZoneStyler"
 const DrawGameZone = (props) => {
   const matrix = props.matrix
   const divStyle = {
-    width: matrix.length * 60 + 20 + "px",
+    width: matrix.length * 35 + 20 + "px",
   }
   return (
     <GameZone style={divStyle}>
