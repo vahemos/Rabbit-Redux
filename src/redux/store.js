@@ -1,18 +1,12 @@
-import { combineReducers, createStore } from 'redux'
-import { GameStateReducer, initialGameState } from '../GameStateReducer'
-import { gameSelectReducer, initialSelectValue } from '../SelectReducer'
-
+import { createStore } from "redux"
+import { GameStateReducer, initialGameState } from "./reducers"
 
 const store = createStore(
-  combineReducers({
-    gameSelect: gameSelectReducer,
-    gameState:GameStateReducer,
-  }),
-  {
-    gameSelect: initialSelectValue  ,
-    gameState:initialGameState
-  }
-
+  GameStateReducer,
+  initialGameState,
+  window.__REDUX_DEVTOOLS_EXTENSION__
+    ? window.__REDUX_DEVTOOLS_EXTENSION__()
+    : undefined
 )
 
-export { store } 
+export { store }

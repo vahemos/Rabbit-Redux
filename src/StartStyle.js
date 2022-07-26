@@ -4,8 +4,7 @@ import { createGlobalStyle } from "styled-components"
 const GlobalStyle = createGlobalStyle`
   body {
     background-image: url("../img/background.jpg");
-    background-repeat: no-repeat;
-  
+    background-repeat: no-repeat;  
     background-size: cover;
     padding: 0;
     margin: 0;
@@ -13,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
   }`
 
 const Wrapper = styled.div`
+ text-align: center;
   width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 `
-const Btn = styled.button`
+const StartBtn = styled.button`
   text-align: center;
   border: 2px solid #34e943;
   font-size: 30px;
@@ -34,6 +34,23 @@ const Btn = styled.button`
   color: white;
   cursor: pointer;
 `
+const NewBoardBtn = styled.button`
+  text-align: center;
+  border: 2px solid #34e943;
+  font-size: 30px;
+  width: 150px;
+  padding: 4px;
+  margin: 3px;
+  border-radius: 20px;
+  outline: none;
+  background-color: #5b3a97;
+  cursor: pointer;
+  color: white;
+  cursor: pointer;
+`
+
+
+
 
 const DirectionBtn = styled.button`
   position: relative;
@@ -65,4 +82,4 @@ const SelectBtn = styled.select`
   cursor: pointer;
   color: white;
 `
-export { Wrapper, Btn, DirectionBtn, SelectBtn, GlobalStyle }
+export { Wrapper, StartBtn, NewBoardBtn, DirectionBtn, SelectBtn,  GlobalStyle }

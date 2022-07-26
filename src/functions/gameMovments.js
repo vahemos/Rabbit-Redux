@@ -9,7 +9,8 @@ const gameMovments = (direction, gameState) => {
     return gameState
   }
   const moveRabbit = rabbitMove(direction, gameState)
-  return wolvesMove(moveRabbit, wolf)
+  wolvesMove(moveRabbit, wolf)
+  return gameState
 }
 
-export{ gameMovments }
+export { gameMovments }
